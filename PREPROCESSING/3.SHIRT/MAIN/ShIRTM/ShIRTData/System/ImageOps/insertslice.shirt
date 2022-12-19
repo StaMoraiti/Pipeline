@@ -1,0 +1,21 @@
+function insertslice(imageormask insert {slice middle} {out $})
+// insertslice(imageormask insert slice out)
+// out = insertslice(input insert slice)
+// out = insertslice(input insert)
+// Inserts the single slice in insert into the image
+// or mask in image or mask at the position specified in slice.
+// If the slice value is not given the middle slice is chosen
+
+size = size(#imageormask)
+if (#slice == middle)
+   slice = fix(((#size[3] + 1) / 2))
+endif
+box = {1 #size[1] 1 #size[2] #slice #slice}
+if (mask?(#imageormask))
+  InsertMask InputMask #imageormask MaskToInsert #insert BoundingBox #box OutputMask #out
+  return #out
+elseif (image?(#imageormask))
+  InsertImage InputImage #imageormask ImageToInsert #insert BoundingBox #box OutputImage #out
+  return #out
+endif
+return #out

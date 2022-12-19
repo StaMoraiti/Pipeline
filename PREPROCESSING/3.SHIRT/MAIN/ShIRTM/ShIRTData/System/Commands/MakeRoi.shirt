@@ -1,0 +1,34 @@
+// MakeRoi
+// MaskRoi Image imagename
+// Multiple regions can be drawn on the image
+// Terminate each region with a right click.
+// Terminate session by closing the image window
+if (parameter?(Size))
+  sz = parameter(Size {512 512 1})
+else
+  image = parameter(Image NULL)
+  Display Mono #image
+  sz = size(#image)
+endif
+output = parameter(Mask mask)
+file = wopen(c:\ShIRTMV7\Displays\bitmap.txt)
+write(#file {1 #sz[3]})
+close(#file)
+execute {(#SYSPATH : System\ : Python\ : makeroi.py) }
+fn = ropen((#DISPLAYPATH : roinum.txt))
+num = read(#fn)
+close(#fn)
+num = #num[1]
+repeat count = 1
+  fn = ropen((#DISPLAYPATH : roi : #count : .txt))
+  line = read(#fn)
+  close(#fn)
+  sc = #sz[1] / 512
+  line = #line * #sc
+  MakeMask Size #sz line Points #line OutputMask $out
+  MaskMorphology InputMask $out fill OutputMask (#output : #count)
+  ++(count)
+until (#count > #num)
+
+
+

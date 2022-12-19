@@ -1,0 +1,13 @@
+function dilatemask(mask {times 1} {out $})
+// dilatemask(mask times out)
+// out = dilatemask(mask times)
+// out = dilatemask(mask)
+
+// The mask is morphologically dilated.
+// If the value of times >1 this operation
+// is repeated the number of times specified in
+// times.  
+// The neighbourhood is always 3 x 3 x 3
+
+MaskMorphology dilate InputMask #mask OutputMask #out Times #times
+return #out

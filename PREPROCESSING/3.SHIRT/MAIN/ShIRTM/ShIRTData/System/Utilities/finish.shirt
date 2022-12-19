@@ -1,0 +1,4 @@
+upload {}
+send variablenames list
+savevariables(vars.txt #list)
+exit

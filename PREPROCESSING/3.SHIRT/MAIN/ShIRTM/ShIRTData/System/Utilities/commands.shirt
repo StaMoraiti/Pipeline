@@ -1,0 +1,26 @@
+print \s20 Built in commands \n \n
+
+fn = ropen((#SYSPATH : commandlist.txt))
+stage = 0
+repeat 
+  fin = 0
+  a = read(#fn)
+  if (is_list(#a))
+    if (length(#a) == 1)
+      if (#stage == 2)
+        print %20s #a[1] \n
+      else
+        print %20s #a[1]
+      endif
+      stage = #stage + 1
+      stage = #stage modulo 3
+    endif
+  else
+    fin = 1
+  endif
+until #fin
+print \n \n
+close(#fn)
+
+print \n
+version

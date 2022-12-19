@@ -1,0 +1,10 @@
+function matrix_size(a)
+// matrix_size(a)
+
+if not(is_matrix(#a))
+  error(not a matrix)
+endif
+rows = length(#a)
+c = #a[1]
+cols = length(#c)
+return {#rows #cols}

@@ -1,0 +1,6 @@
+function sum(image)
+// sum(image)
+// Calculate the sum of all the voxels in the
+// image
+Statistics image InputImage #image Sum sum
+return #sum

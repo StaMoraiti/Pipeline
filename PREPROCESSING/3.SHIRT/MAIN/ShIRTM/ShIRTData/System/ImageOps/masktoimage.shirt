@@ -1,0 +1,6 @@
+// masktoimage(mask out)
+// Converts a mask to an image
+out = $
+arguments(mask out)
+CopyMask InputMask #mask OutputImage #out
+return #out

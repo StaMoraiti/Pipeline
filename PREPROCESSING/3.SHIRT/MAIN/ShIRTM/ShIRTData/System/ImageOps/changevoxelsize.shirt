@@ -1,0 +1,62 @@
+function changevoxelsize(input ivs ovs {out $})
+// output = changevoxelsize(inputimage inputvoxelsize outputvoxelsize)
+// changevoxelsize(inputimage inputvoxelsize outputvoxelsize output)
+//
+// Converts an image with the voxel dimensions given in the list 
+// in inputvoxelsize (typically in mm) to an image with the voxel dimensions 
+// given inoutputvoxelsize.
+
+size = size(#input)
+fsize = {(#size[1] * #ivs[1] / #ovs[1]) (#size[2] * #ivs[2] / #ovs[2]) (#size[3] * #ivs[3] / #ovs[3])}
+Size = round(#fsize);
+rat = {(#fsize[1] / #Size[1]) (#fsize[2] / #Size[2]) (#fsize[3] / #Size[3])}
+slices = (#size[3] > #Size[3]) ? {#size[3] #Size[3]}
+rows = (#size[2] > #Size[2]) ? {#size[2] #Size[2]}
+columns = (#size[1] > #Size[1]) ? {#size[1] #Size[1]}
+newsize = {#columns #rows #slices}
+MakeImage Size #newsize OutputImage $dest
+
+if (#size[1] == 1)
+  zoff = 0
+else
+	zoff = neg(((#newsize[3] - #size[3]) / 2))
+endif
+yoff = neg(((#newsize[2] - #size[2]) / 2))
+xoff = neg(((#newsize[1] - #size[1]) / 2))
+if (#size[3] == 1)
+  zscale = 1
+else
+  zscale = (#size[3] / #Size[3])
+endif
+yscale = (#size[2] / #Size[2])
+xscale = (#size[1] / #Size[1])
+trans = {{1 0 0 0} {#xoff 1 0 0} {#yoff 0 1 0} {#zoff 0 0 1}}
+scale = {{1 0 0 0} {0 #xscale 0 0} {0 0 #yscale 0} {0 0 0 #zscale}}
+mape = {{1 0 0 0} {0 #rat[1] 0 0} {0 0 #rat[2] 0} {0 0 0 #rat[3]}}
+map = (#trans * #scale * #mape)
+
+MakeMap MapMatrix #map Size {#columns #rows #slices} OutputMap $binmap
+InsertImage InputImage $dest ImageToInsert #input BoundingBox {1 #size[1] 1 #size[2] 1 #size[3]} ~
+  OutputImage $dest
+
+WarpImage InputImage $dest InputMap $binmap OutputImage #out 
+
+xoff = (#newsize[1] - #Size[1] / 2) 
+yoff = (#newsize[2] - #Size[2] / 2)
+zoff = (#newsize[3] - #Size[3] / 2)
+
+box = {(#xoff + 1) (#xoff + #Size[1]) (#yoff + 1) (#yoff + #Size[2]) (#zoff + 1) (#zoff + #Size[3])}
+box = integer(#box)
+
+ExtractImage InputImage #out BoundingBox #box OutputImage #out
+return #out
+
+
+
+
+
+
+
+
+
+

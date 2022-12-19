@@ -1,0 +1,23 @@
+// JoinMasks First first_mask Secon secondmask Along direction OutputMask output_mask
+if flag(help)
+  print JoinMasks
+  print \s4 First <first_mask> \n
+  print \s4 Second <second_mask> \n
+  print \s4 Along <rows, columns, slices> \n
+  print \s4 OutputMask <output_mask> \n
+  quit
+endif
+
+first = parameter(First first_image)
+second = parameter(Second second_image)
+direction = parameter(Along columns)
+output = parameter(OutputMask output_mask)
+CopyMask InputMask #first OutputImage $tempf
+CopyMask InputMask #second OutputImage $temps
+JoinImages First $tempf Second $temps Along #direction OutputImage $out
+CopyImage  InputImage OutputMask #output
+quit output
+
+
+  
+  

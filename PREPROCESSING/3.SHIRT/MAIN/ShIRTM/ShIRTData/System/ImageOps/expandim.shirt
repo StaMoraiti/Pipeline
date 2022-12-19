@@ -1,0 +1,7 @@
+function expandimage(a n b)
+//
+mx = 1.0 / #n[1]
+my = 1.0 / #n[2]
+MakeMap Size size(#a) NodeSpacing 8 MapMatrix {{1 0 0 0} {0 #mx 0 0} {0 0 #my 0} {0 0 0 1}} OutputMap $map
+WarpImage InputImage #a InputMap $map OutputImage #b
+return #b

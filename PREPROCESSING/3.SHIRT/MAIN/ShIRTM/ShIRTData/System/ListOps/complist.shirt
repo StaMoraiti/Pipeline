@@ -1,0 +1,21 @@
+function complist(lista listb)
+// complist(lista listb)
+//
+// Compares two lists.  Either list can contain the 
+// wildcard character * which matches any token in the
+// other list
+
+la = length(#lista)
+lb = length(#listb)
+
+if (#la != #lb)
+  return 0
+endif
+repeat count = #la
+  if ((#lista[#count] != *) & (#listb[#count] != *))
+    if (#lista[#count] != #listb[#count])
+      return 0
+    endif
+  endif
+until (#(--(count)) == 0)
+return 1

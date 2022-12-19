@@ -1,0 +1,31 @@
+function tangent(angle)
+// a = tangent(angle)
+//
+// Calculates the tangent whos angle is angle
+// The answer lies between 0 and 180
+if (list?(#angle))
+  ln = length(#angle)
+  anglel = {}
+  repeat count = 2
+    anglel = (#anglel : {tan(#angle[#count])})
+    ++(count)
+  until (#count > #ln)
+  return (#anglel)
+elseif (!(number?(#angle)))
+  error(input must be a number)
+endif
+c = cos(#angle)
+if (abs(#c) < 0.0000000001)
+  if (#a >= 0)
+    return inf
+  else
+    return -inf
+  endif
+else
+  return (sin(#angle) / #c)
+endif
+
+
+
+
+     

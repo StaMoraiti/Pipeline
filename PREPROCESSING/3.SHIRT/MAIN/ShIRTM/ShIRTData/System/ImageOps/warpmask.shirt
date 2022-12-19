@@ -1,0 +1,5 @@
+function warpmask(image map {out $})
+// warpimage(mask map out)
+// Apply the map to the mask
+WarpMask InputMask #image InputMap #map OutputMask #out
+return #out

@@ -1,0 +1,19 @@
+function abs(num)
+// abs(num)
+// return absolute value of the argument.
+// the argument must be a number.
+if (list?(#num))
+  ln = length(#num)
+  numl = {}
+  if (#ln > 1)
+    repeat count = 1
+      numl = (#numl : {abs(#num[#count])})
+      ++(count)
+    until (#count > #ln)
+  endif
+  return (#numl)
+elseif (number?(#num))
+  return (#num ? {#num 0 neg(#num)})
+else
+  error(#num is not a number)
+endif

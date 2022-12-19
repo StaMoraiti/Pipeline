@@ -1,0 +1,7 @@
+function sumslices(inputimage {outputimage $})
+// sumslices(input output)
+//
+size = size(#inputimage)
+PackImage InputImage #inputimage betweenslices By #size[3] OutputImage #outputimage
+return #outputimage
+

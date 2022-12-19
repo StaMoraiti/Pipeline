@@ -1,0 +1,22 @@
+function atan(num)
+// a = atan(num)
+//
+// Compute the angle whose value is num
+// The answer will lie between -90 to 90 degrees
+upper = 90
+lower = -90
+repeat
+  val = (#upper + #lower) / 2
+  diff = tan(#val) - #num
+  if (abs(#diff) < 0.0001)
+    return #val
+  endif
+  if (#diff < 0.0)
+    lower = #val
+  else
+    upper = #val
+  endif
+until 0
+return failed
+
+     

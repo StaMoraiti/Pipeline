@@ -1,0 +1,13 @@
+function boundingbox(mask)
+// b = boundingbox(mask)
+//
+// This calculates the size of the rectangular
+// box which just encloses the mask specified in
+// the argument.  The value returned is as a list
+// {lowcol highcol lowrow highrow lowslice highslice}
+
+if (not(is_mask(#mask)))
+  error(#mask is not a mask)
+endif
+Statistics mask InputMask #mask BoundingBox box
+return #box

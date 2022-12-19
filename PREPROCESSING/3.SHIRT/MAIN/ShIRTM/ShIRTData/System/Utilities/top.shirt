@@ -1,0 +1,5 @@
+function top()
+//
+a = pop()
+push(#a)
+return #a

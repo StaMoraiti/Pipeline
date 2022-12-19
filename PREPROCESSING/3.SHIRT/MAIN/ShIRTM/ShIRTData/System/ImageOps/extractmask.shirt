@@ -1,0 +1,15 @@
+function extractmask(mask box {out $})
+// extractmask(mask box out)
+// out = extractmask(mask box)
+//
+// Extracts the sub-mask selected by the bounding box
+// and returns this mask.
+if (!(mask?(#mask)))
+  error(#mask is not a mask)
+endif
+if (length(#box) == 4)
+  box = #box : {1 1}
+endif
+ExtractMask InputMask #mask BoundingBox #box OutputMask #out
+return #out
+  

@@ -1,0 +1,26 @@
+function loadvariables(file)
+filename = #SYSPATH : #file
+if (file?(#filename) == 0)
+  return {}
+endif
+fp = ropen(#file)
+eof = 0
+vlist = {}
+repeat 
+  var = read(#fp)
+//  print #var \n
+  if (list?(#var))
+    t = tail(#var)
+    #var[1] = length(#t) > 1 ? {#t #t[1]}
+    vlist = (#vlist : #var[1])
+  elseif (#var == EOF)
+    eof = 1
+  else
+    error(file reading error)
+  endif
+until #eof
+close(#fp)
+download #vlist
+return #vlist
+
+  

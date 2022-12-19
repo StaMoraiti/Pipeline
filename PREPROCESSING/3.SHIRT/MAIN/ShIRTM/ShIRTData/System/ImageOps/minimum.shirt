@@ -1,0 +1,9 @@
+function minimum(a)
+// minimum(a)
+// Returns the minimum value in an image
+if (is_image(#a))
+  Statistics image Minimum max InputImage #a
+else
+  error(not an image)
+endif
+return #max

@@ -1,0 +1,119 @@
+fini
+/cle
+
+/prep7
+
+ET,1,SOLID185
+
+/INPUT,'nodes','txt'
+/INPUT,'elements','txt'
+
+MP,EX,1,17000 
+MP,PRXY,1,0.3
+
+
+/FORMAT, , F15.10, 15, 10, 1000000, , 
+
+/solu
+
+/INPUT,'disp','txt'
+
+allsel
+eqslv,pcg
+solve
+FINISH  
+
+
+/prep7
+
+/set, last
+CDWRITE,DB,input,CDB
+
+
+
+/POST1
+
+/OUTPUT,results,txt     ! redirect output to a file called "results.txt" with principal strains
+PRNSOL, EPEL, PRIN
+/out
+
+/OUTPUT,results_xyz,txt     ! redirect output to a file called "results_xyz.txt" with strain components
+PRNSOL, EPEL, COMP
+/out
+
+
+! Create element table, column 1 to 6 is components, 7 to 9 are principal strain
+ETABLE,StrainXX,EPEL,X,avg
+ETABLE,StrainYY,EPEL,Y,avg
+ETABLE,StrainZZ,EPEL,Z,avg
+ETABLE,StrainXY,EPEL,XY,avg
+ETABLE,StrainYZ,EPEL,YZ,avg
+ETABLE,StrainXZ,EPEL,XZ,avg
+
+ETABLE,Strain1,EPEL,1,avg
+ETABLE,Strain2,EPEL,2,avg
+ETABLE,Strain3,EPEL,3,avg
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+
+*get,nElements,ELEM,0,count
+*status,nElements
+
+
+!Create an array to store strain components
+*DIM,vData,ARRAY,nElements,7
+
+!Create an array to store strain principal
+*DIM,vData2,ARRAY,nElements,4
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! Loop over each element
+
+N = 0
+
+*do,i,1,nElements
+
+     *get,ElemNum,ELEM,N,NXTH
+      vData(i,1) = ElemNum      
+     *get,vData(i,2),ETAB,1,ELEM,ElemNum
+     *get,vData(i,3),ETAB,2,ELEM,ElemNum
+     *get,vData(i,4),ETAB,3,ELEM,ElemNum
+     *get,vData(i,5),ETAB,4,ELEM,ElemNum
+     *get,vData(i,6),ETAB,5,ELEM,ElemNum
+     *get,vData(i,7),ETAB,6,ELEM,ElemNum
+
+
+     vData2(i,1) = ElemNum
+     *get,vData2(i,2),ETAB,7,ELEM,ElemNum
+     *get,vData2(i,3),ETAB,8,ELEM,ElemNum
+     *get,vData2(i,4),ETAB,9,ELEM,ElemNum
+
+     N = ElemNum
+    
+*enddo
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!output results into ASCII file StrainTensor.txt
+*cfopen,results_elements_xyz,txt
+*vwrite,vData(1,1),vData(1,2),vData(1,3),vData(1,4),vData(1,5),vData(1,6),vData(1,7)
+(F10.0,TL1,' ','  'F15.10,'  ',F15.10,'  ',F15.10,'  ',F15.10,'  ',F15.10,'  ',F15.10)
+*cfclos
+
+
+!output results into ASCII file StrainPrincipal.txt
+*cfopen,results_elements,txt
+*vwrite,vData2(1,1),vData2(1,2),vData2(1,3),vData2(1,4)
+(F10.0,TL1,' ','  'F15.10,'  ',F15.10,'  ',F15.10)
+*cfclos
+
+
+
+
+
+
+
+
+finish

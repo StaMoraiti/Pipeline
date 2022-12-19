@@ -1,0 +1,13 @@
+function axes()
+// axes()
+xs = xpoint(#XMAX)
+ys = ypoint(#YMAX)
+xo = xpoint(#XMIN)
+yo = ypoint(#YMIN)
+ox = xpoint(0)
+oy = ypoint(0)
+dash = fix((#SCREENSIZE[1] / 50)); 
+axiswidth = fix((#SCREENSIZE[1] / 125));
+dashwidth = fix((#SCREENSIZE[1] / 200))
+
+Display Draw {{{#ox #yo} {#ox #ys}} {{#xo #oy} {#xs #oy}}} LineWidth #axiswidth Resolution resolution()

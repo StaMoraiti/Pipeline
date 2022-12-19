@@ -1,0 +1,11 @@
+function dec(a {num 1})
+// b = dec(a num)
+//
+// decrements the contents of a by num
+
+_a_ = #a
+upload #_a_
+#_a_ = #(#_a_) - #num
+download #_a_
+return #_a_
+

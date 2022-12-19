@@ -1,0 +1,28 @@
+function getVTKimage(vtkinput {output $} {vtkfolder #VTKPATH} )
+// getVTKimage(input_image output vtkfolder)
+// getVTKimage(input_image output)
+// output = getVTKimage(input_image)
+//
+// This function converts an image in vtk format to an image
+// in ShIRT format.
+// The path to the vtk image can be stored in the global variable
+// VTKPATH.  This can be done any time prior to running this function
+// The function used an external program called vtk2shirt.
+// vtk2shirt produces two output files, a .image which contains the
+// image and a .txt which contains additional information from the
+// .vtk file such as voxel dimensions in mm and the co-ordinates of
+// the origin point of the image in the space of the imaging system.
+//
+// This function can act as a template for other file conversion
+// functions.  An external file converstion program needs to be
+// written for each file format.
+ 
+
+execute  (#SYSPATH : vtk2shirt) (#vtkfolder : #vtkinput : .vtk) (#DATAPATH : #output)
+loadvariables((#DATAPATH : #output : .txt))
+// create a global variable with the image parameters
+VTKPARAM = {#ColumnSpacing #RowSpacing #SliceSpacing #ColumnOrigin #RowOrigin #SliceOrigin #Label}
+return #output
+
+
+

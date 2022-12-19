@@ -1,0 +1,69 @@
+// dicom DicomFolder <> OutputImage <>
+
+if flag(help)
+  print Dicom \n
+  print \s4 DicomFolder <> \n
+  print \s4 OutputImage <output_image> \n
+  exit
+endif
+
+Dicompath = parameter(DicomFolder dicom)
+
+print #Dicompath \n
+
+output = parameter(OutputImage output_image)
+DataPath = #DATAPATH
+setpath DataPath (#SYSPATH : dicomdata\)
+execute dir #Dicompath /b > (#SYSPATH : directory.txt)
+Fid = ropen((#SYSPATH : directory.txt))
+repeat count = 0
+  text = read(#Fid)
+  count = #count + 1
+until (!(list?(#text)))
+close(#Fid)
+files = #count - 1
+print number of files = #files \n
+Maximum = 0
+Minimum = 10000
+
+ImageNumber = 1
+
+Fid = ropen((#SYSPATH : directory.txt))
+repeat count = 0
+  text = read(#Fid) 
+  execute dcm2ShIRT (#Dicompath : #text[1]) (#SYSPATH : dicomdata\tempdicom) > dump
+  v = loadvariables((dicomdata\tempdicom : .txt))
+  if (#Maximum < #ImageNumber)
+    Maximum = #ImageNumber
+  endif
+  if (#Minimum > #ImageNumber)
+    Minimum = #ImageNumber
+  endif
+  CopyImage InputImage tempdicom OutputImage (dicom : #ImageNumber)
+  print imagenumber =  #ImageNumber \s4 \r
+  count = #count + 1
+until (#count == fix(#files))
+close(#Fid) 
+print First image = #Minimum Last image = #Maximum \n
+
+size = size((dicom : #Minimum))
+
+MakeImage Size {#size[1] #size[2] #files} OutputImage $temp
+repeat count = 1
+  InsertImage InputImage $temp ImageToInsert (dicom : #count) ~
+     SliceUpper #count SliceLower #count OutputImage $temp
+  print #count \r
+  count = #count + 1
+until (#count > #files)
+CopyImage InputImage $temp OutputImage #output DataPath #DataPath
+ 
+execute del (#DATAPATH : tempdicom.*) (#DATAPATH : dicom*.image)
+
+setpath DataPath #DataPath
+
+
+
+
+
+
+

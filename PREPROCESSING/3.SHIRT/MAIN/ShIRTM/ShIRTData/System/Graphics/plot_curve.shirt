@@ -1,0 +1,20 @@
+function plot(curve {colour black})
+// plot_curve(curve)
+
+ln = length(#curve)
+// YMAX = cmax(#curve)
+// YMIN = cmin(#curve)
+YMAX = 50
+YMIN = 0
+XMIN = 0
+XMAX = #ln - 1
+axes()
+
+mat = {{xpoint(0) ypoint(#curve[1])}}
+repeat count = 1
+  mat = #mat : {{xpoint(#count) ypoint(#curve[(#count + 1)])}}
+until (#(++(count)) > (#ln - 1))
+Display Draw {#mat} Resolution resolution() Colour #colour
+ticks()
+return #mat
+

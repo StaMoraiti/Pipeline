@@ -1,0 +1,13 @@
+// setup
+
+print ShIRTM setup \n
+
+execute cd > SysPath.txt
+fn = ropen(SysPath.txt)
+SYSPATH = read(#fn)
+close(#fn)
+SYSPATH = (#SYSPATH[1] + \)
+fn = wopen(SysPath.txt)
+write(#fn,{#SYSPATH})
+close(#fn)
+

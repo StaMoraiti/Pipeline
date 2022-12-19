@@ -1,0 +1,9 @@
+function smooth(image {times 1} {out $})
+// smooth(image times out)
+// Smooths an image the number of times
+// given in times
+// out = $
+// times = 1
+// arguments(image times out)
+SmoothImage InputImage #image Times #times OutputImage #out
+return #out

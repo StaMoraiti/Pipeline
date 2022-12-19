@@ -1,0 +1,5 @@
+function peek(pos)
+//
+a = pop(#pos)
+push({#a #pos})
+return #a

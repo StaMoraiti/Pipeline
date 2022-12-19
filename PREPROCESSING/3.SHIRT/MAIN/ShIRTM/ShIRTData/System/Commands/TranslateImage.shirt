@@ -1,0 +1,14 @@
+// TranslateImage
+
+input = parameter(InputImage input_image)
+output = parameter(OutputImage output_image)
+columns = parameter(Columns 0)
+rows = parameter(Rows 0)
+slices = parameter(Slices 0)
+
+size = size(#input)
+MakeMap Size #size MapMatrix {{1 0 0 0} {#columns 1 0 0} {#rows 0 1 0} {#slices 0 0 1}} OutputMap $map
+WarpImage InputImage #input InputMap $map OutputImage #output
+
+
+

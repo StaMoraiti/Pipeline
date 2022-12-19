@@ -1,0 +1,20 @@
+function integer(a)
+// round(a)
+// Rounds the numerical value of a to
+// the nearest integer.  If a is a numerical
+// list all the elements are individually rounded.
+
+if (list?(#a))
+  ln = length(#a)
+  b = {}
+  repeat count = 1
+    b = (#b : {integer((#a[#count]))})
+    count = #count + 1
+  until (#count > #ln)
+  result = #b
+elseif (!(number?(#a)))
+  error(not a number in integer)
+else
+  result = fix(#a)
+endif
+return #result

@@ -1,0 +1,15 @@
+function objecttype(a)
+// objecttype(a)
+// Returns the type of an object
+// image, mask, map, mesh
+type = unknown
+if (is_image(#a))
+  type = image
+elseif (is_mask(#a))
+  type = mask
+elseif (is_mesh(#a))
+  type = mesh
+elseif (is_map(#a))
+  type = map
+endif
+return #type

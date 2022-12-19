@@ -1,0 +1,22 @@
+// saveVTKimage Input image VTKOutput vtkimage VTKfolder #VTKDATA
+
+inputimage = parameter(Input input)
+outputimage = parameter(VTKOutput vtkoutput)
+vtkdir = parameter(VTKfolder #DATAPATH)
+
+fp = wopen((#DATAPATH : #inputimage : .txt))
+write(#fp {ColumnSpacing #VTKPARAM[1] \n})
+write(#fp {RowSpacing #VTKPARAM[2] \n})
+write(#fp {SliceSpacing #VTKPARAM[3] \n})
+write(#fp {ColumnOrigin #VTKPARAM[4] \n})
+write(#fp {RowOrigin #VTKPARAM[5] \n})
+write(#fp {SliceOrigin #VTKPARAM[6] \n})
+write(#fp {Label #VTKPARAM[7] \n})
+close(#fp)
+
+execute  (#SYSPATH : shirt2vtk) (#DATAPATH : #inputimage) (#vtkdir : #outputimage : .vtk) 
+
+quit 
+
+
+

@@ -1,0 +1,20 @@
+function xlabel(label)
+
+if (variable?(xlabel))
+  xlab = text(#xlabel {800 100} 0)
+  display Draw #xlab Resolution {1600 1600} LineWidth 3
+endif
+if (variable?(ylabel))
+  ylab = text(#ylabel {100 800} -90)
+  display Draw #ylab Resolution {1600 1600} LineWidth 3
+endif
+if (variable?(title))
+  tl = text(#title {600 1500} 0)
+  display Draw #tl Resolution {1600 1600} LineWidth 3
+endif
+xtickval = (#xlim[2] - #xlim[1]) / 5
+
+
+
+
+

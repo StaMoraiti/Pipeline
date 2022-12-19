@@ -1,0 +1,23 @@
+function ticks()
+// axes()
+return
+xs = xpoint(#XMAX)
+ys = ypoint(#YMAX)
+xo = xpoint(#XMIN)
+yo = ypoint(#YMIN)
+ox = xpoint(0)
+oy = ypoint(0)
+dash = fix((#SCREENSIZE[1] / 50)); 
+dashwidth = fix((#SCREENSIZE[1] / 200))
+xtick = {{{xpoint((#XMAX / #nticks)) #oy} {xpoint((#XMAX / #nticks)) (#oy - #dash)}}}
+ytick = {{{#ox ypoint((#YMAX / #nticks))} {(#ox - #dash) ypoint((#YMAX / #nticks))}}}
+repeat count = 2
+  xtick = #xtick : {{{xpoint((#XMAX * #count / 5)) #oy} {xpoint((#XMAX * #count / 5)) (#oy - #dash)}}}
+  ytick = #ytick : {{{#ox ypoint((#YMAX * #count / #nticks))} {(#ox - #dash) ypoint((#YMAX * #count / #nticks))}}}
+  ++(count)
+until (#count > #nticks)
+lines = #xtick : #ytick
+Display Draw #lines LineWidth #dashwidth Resolution resolution()
+
+
+

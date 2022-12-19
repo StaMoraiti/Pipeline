@@ -1,0 +1,12 @@
+function bimarytomask(binary {out $})
+// mask = binarytomask(binary)
+// binarytomask(binary mask)
+//
+// A binary image is an image whos minimum value is 
+// 0 and whose maximum value is 1 with the value of 
+// all other voxels lying between or equal to
+// these values. This function converts all voxels 
+// with value below or equal to 0.5 to 0 and the
+// remainder to 1.
+ImageLogic Left #binary > Right 0.5 OutputMask #out
+return #out

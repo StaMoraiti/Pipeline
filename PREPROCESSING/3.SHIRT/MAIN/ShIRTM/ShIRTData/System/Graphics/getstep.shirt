@@ -1,0 +1,12 @@
+function getstep(a)
+//
+b = 2 * #a / 5
+print #b \n
+ln = length(#b)
+repeat count = 1
+  q = #b
+  ++(count)
+until (#count > #ln)
+
+      
+      

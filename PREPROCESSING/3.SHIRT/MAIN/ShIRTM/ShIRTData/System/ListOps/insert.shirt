@@ -1,0 +1,32 @@
+function insert(a b n)
+// replace the nth element in the list a with the value b
+
+if (!(list?(#a)))
+  error(not a list)
+endif
+if (list?(#n))
+  error(more than one insert location specified)
+  lnn = length(#n)
+else
+  lnn = 1
+endif
+
+ln = length(#a)
+n = #n[1]
+if ((#n > #ln))
+  error(subscript out of range)
+endif
+if (#ln == 1)
+  return #b
+endif
+if (#n == 1)
+  b = ({#b} : #a[{2 #ln}])
+elseif (#n == #ln)
+  b = (#a[{1 (#ln - 1)}] : {#b})
+else
+  b = (#a[{1 fix((#n - 1))}] : #b : #a[{fix((#n + 1)) #ln}])
+endif
+return #b
+
+  
+  

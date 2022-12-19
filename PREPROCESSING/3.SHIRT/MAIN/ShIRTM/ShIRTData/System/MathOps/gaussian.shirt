@@ -1,0 +1,17 @@
+function gaussian(num)
+// gaussian(num)
+
+// Returns the gaussian of the value num
+// If num is a list of numbers returns the value
+// of all the numbers as a list
+//
+if (list?(#num))
+  nm = {}
+  len = length(#num)
+  repeat count = 1
+    nm = #nm : gaussian(#num[#count])
+  until (#(++(count)) > #len)
+else
+  nm = exp(neg((#num * #num))) 
+endif
+return (#nm)

@@ -1,0 +1,4 @@
+function setupscreen()
+// sets up and changes the parameters used in plotting
+SCREENSIZE = {1000 1000}
+BORDER = fix({(#SCREENSIZE[1] / 10) (#SCREENSIZE[2] / 10)})

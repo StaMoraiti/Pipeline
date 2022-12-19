@@ -1,0 +1,15 @@
+function matprint(mat)
+// matprint(mat)
+// Prints the contents of a matrix as an array
+// of numbers
+
+sz = size(#mat)
+repeat row = 1
+  repeat col = 1
+    print %8.4f #mat[#row][#col]
+    col = #col + 1
+  until (#col > #sz[2])
+  print \n
+  row = #row + 1
+until (#row > #sz[1])
+return {}

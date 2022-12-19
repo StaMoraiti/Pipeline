@@ -1,0 +1,5 @@
+function resolution()
+//
+xr = (2 * #BORDERS[1] + #SCREENSIZE[1])
+yr = (2 * #BORDERS[2] + #SCREENSIZE[2])
+return {#xr #yr}

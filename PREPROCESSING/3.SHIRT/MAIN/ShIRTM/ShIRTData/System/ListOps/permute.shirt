@@ -1,0 +1,19 @@
+function permute(a b)
+// permute list(a b)
+// 
+// permute the elements of by the numerical
+// sequence in b
+lna = length(#a)
+lnb = length(#b)
+if (#lna != #lnb)
+  error(lists not of equal length)
+endif
+c = {#a[#b[1]]}
+if (#lna == 1)
+  return #c
+endif
+repeat count = 2
+  c = #c : {#a[#b[#count]]}
+  count = #count + 1
+until (#count > #lna)
+return #c

@@ -1,0 +1,6 @@
+function xpoint(x)
+//
+XSCALE = #SCREENSIZE[1] / (#XMAX - #XMIN)
+xs = #XSCALE * (#x - #XMIN) + #BORDERS[1]
+xs = fix(#xs)
+return #xs

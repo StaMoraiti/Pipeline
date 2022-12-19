@@ -1,0 +1,4 @@
+function head(list {to 1})
+// head(list)
+//
+return #list[{1 #to}]

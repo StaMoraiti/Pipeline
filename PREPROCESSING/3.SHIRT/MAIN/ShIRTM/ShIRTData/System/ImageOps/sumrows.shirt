@@ -1,0 +1,15 @@
+function sumrows(image {sumimage $})
+// sumrows(image sumimage)
+// Sums voxel values along the row axis
+// in a 3D image 0r mask.  sumimage is a 2D image
+if (is_image(#image))
+  PermuteImage InputImage #image Columns columns Rows slices Slices rows OutputImage $sum
+  size = size($sum)
+  PackImage InputImage $sum By #size[3] betweenslices OutputImage #sumimage
+elseif (is_mask(#image))
+  CopyMask InputMask #image OutputImage $image
+  PermuteImage InputImage $image Columns columns Rows slices Slices rows OutputImage $sum
+  size = size($sum)
+  PackImage InputImage $sum By #size[3] betweenslices OutputImage #sumimage
+endif
+return #sumimage

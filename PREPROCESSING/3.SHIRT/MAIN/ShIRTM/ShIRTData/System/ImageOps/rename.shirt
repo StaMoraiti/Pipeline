@@ -1,0 +1,17 @@
+function rename(input output)
+//
+print #input #output \n
+upload #input
+if (is_image(#input))
+  CopyImage InputImage #input OutputImage #output rename
+elseif (is_mask(#input))
+  CopyMask InputMask #input OutputMask #output rename
+elseif (is_map(#input))
+  CopyMap InputMap #input OutputMap #output rename
+elseif (is_mesh(#input))
+  CopyMesh InputMesh #input OutputMesh #output rename
+else
+  error(Not a recognised object type)
+endif
+download #output
+return

@@ -1,0 +1,39 @@
+function acos(num)
+// a = acos(num)
+//
+// Calculates the angle whos cosine is num
+// The answer lies between 0 and 180
+if (list?(#num))
+  ln = length(#num)
+  numl = {}
+  repeat count = 1
+    numl = (#numl : {acos(#num[#count])})
+    ++(count)
+  until (#count > #ln)
+  return (#numl)
+elseif (!(number?(#num)))
+  error(input must be a number)
+endif
+if (abs(#num) > 1.0)
+  error(input too large for acos)
+endif
+upper = 180
+lower = 0
+repeat
+  val = (#upper + #lower) / 2
+  diff = cos(#val) - #num
+  if (abs(#diff) < 0.000000001)
+    return #val
+  endif
+  if (#diff > 0.0)
+    lower = #val
+  else
+    upper = #val
+  endif
+until (0)
+return {}
+
+
+
+
+     

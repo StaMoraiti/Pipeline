@@ -1,0 +1,18 @@
+// MakeImage Size {} OutputImage output_image
+if flag(help)
+  print MakeImage \n
+  print \s4 Size <64 64 64> \n
+  print \s4 OutputImage <output_image> \n
+  quit
+endif
+
+Size = parameter(Size {64 64 64})   // get size parameter
+OutputImage = parameter(OutputImage output_image)
+MakeMask Size #Size OutputMask $masktemp BoundingBox {1 #Size[1] 1 #Size[2] 1 #Size[3]} rectangular
+CopyMask InputMask $masktemp OutputImage #OutputImage
+ImageArithmetic Left #OutputImage * Right 0 OutputImage #OutputImage
+quit OutputImage
+
+
+  
+  
