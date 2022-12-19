@@ -1,0 +1,12 @@
+function saveinternal(a)
+// saveinternal(a)
+// Copies an internal image or mask to 
+// a disk file of the same name, without the
+// leading $
+
+if (is_image(#object))
+  copyimage InputImage #object OutputImage #object[{2 #length(#object)}]
+elseif (is_mask(#object))
+  copymask InputMask #object OutputMask subtoken(#object 2)
+endif
+return

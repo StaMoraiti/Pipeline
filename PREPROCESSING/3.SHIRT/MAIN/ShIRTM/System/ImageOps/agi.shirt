@@ -1,0 +1,14 @@
+function agi(imageormask {gradientimage $})
+// grad = agi(imageormask)
+// agi(imageormask gradientimage)
+//
+// Calculates the absolute gradient of the image or mask 
+// specified in the first argument.  
+// If the input is a mask the output is an image.
+if (mask?(#imageormask))
+  masktoimage(#imageormask $im)
+else
+  CopyImage InputImage #imageormask OutputImage $im
+endif
+AbsoluteGradient InputImage $im OutputImage #gradientimage
+return #gradientimage

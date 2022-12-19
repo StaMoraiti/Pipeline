@@ -1,0 +1,15 @@
+// permutelist(a num)
+// Reorders the elements of the list a as
+// specified by the positions in the numerical
+// list b
+n = arguments(a b)
+if (#n != 2)
+  error(wrong number of arguments)
+endif
+ln = length(#a)
+c = {}
+repeat count = 1
+  c = #c + #a[#b[#count]]
+  count = #count + 1
+until (#count > #ln)
+return #c

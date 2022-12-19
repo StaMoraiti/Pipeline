@@ -1,0 +1,8 @@
+function centre(mask)
+// c = centre(mask)
+//
+// Calculates the centre of gravity of a mask
+// The output is a list {colcog rowcog slicecog}
+
+Statistics mask InputMask #mask Centre cog
+return #cog

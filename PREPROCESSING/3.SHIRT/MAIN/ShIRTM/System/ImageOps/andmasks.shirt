@@ -1,0 +1,9 @@
+function andmasks(maska maskb {maskc $})
+// maskd = andmasks(maska maskb)
+// andmasks(maskc maskb maskc)
+
+// Calculates the logical and between the
+// two masks maska and maskb.  
+
+MaskLogic Left #maska & Right #maskb OutputMask #maskc
+return #maskc

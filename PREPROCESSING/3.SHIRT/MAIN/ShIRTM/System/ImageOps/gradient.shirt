@@ -1,0 +1,58 @@
+function gradient(image {grad $})
+// gradient(image grad)
+// grad = gradient(image)
+//
+// This function computes the absolute gradient of an image
+// and the gradient components in the col, row, and slice 
+// directions.  The result is a multivalued image. 
+
+size = size(#image)
+if (#size[3] > 1)
+  AbsoluteGradient InputImage #image OutputImage #grad
+//x direction
+  MakeMap Size #size MapMatrix {{1 0 0 0} {1 1 0 0} {0 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $right
+  MakeMap Size #size MapMatrix {{1 0 0 0} {-1 1 0 0} {0 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $left
+  ImageArithmetic Left $left - Right $right OutputImage $temp
+  ImageArithmetic Left $temp * Right 0.5 OutputImage $temp
+  CopyImage InputImage $temp append OutputImage #grad
+//y direction
+  MakeMap Size #size MapMatrix {{1 0 0 0} {0 1 0 0} {1 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $right
+  MakeMap Size #size MapMatrix {{1 0 0 0} {0 1 0 0} {-1 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $left
+  ImageArithmetic Left $left - Right $right OutputImage $temp
+  ImageArithmetic Left $temp * Right 0.5 OutputImage $temp
+  CopyImage InputImage $temp append OutputImage #grad
+//z direction
+  MakeMap Size #size MapMatrix {{1 0 0 0} {0 1 0 0} {0 0 1 0} {1 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $right
+  MakeMap Size #size MapMatrix {{1 0 0 0} {0 1 0 0} {0 0 1 0} {-1 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $left
+  ImageArithmetic Left $left - Right $right OutputImage $temp
+  ImageArithmetic Left $temp * Right 0.5 OutputImage $temp
+  CopyImage InputImage $temp append OutputImage #grad
+else
+  AbsoluteGradient InputImage #image OutputImage #grad
+//x direction
+  MakeMap Size #size MapMatrix {{1 0 0 0} {1 1 0 0} {0 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $right
+  MakeMap Size #size MapMatrix {{1 0 0 0} {-1 1 0 0} {0 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $left
+  ImageArithmetic Left $left - Right $right OutputImage $temp
+  ImageArithmetic Left $temp * Right 0.5 OutputImage $temp
+  CopyImage InputImage $temp append OutputImage #grad
+//y direction
+  MakeMap Size #size MapMatrix {{1 0 0 0} {0 1 0 0} {1 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $right
+  MakeMap Size #size MapMatrix {{1 0 0 0} {0 1 0 0} {-1 0 1 0} {0 0 0 1}} OutputMap $map
+  WarpImage InputImage #image InputMap $map OutputImage $left
+  ImageArithmetic Left $left - Right $right OutputImage $temp
+  ImageArithmetic Left $temp * Right 0.5 OutputImage $temp
+  CopyImage InputImage $temp append OutputImage #grad
+endif
+return #grad
+
+ 
+  

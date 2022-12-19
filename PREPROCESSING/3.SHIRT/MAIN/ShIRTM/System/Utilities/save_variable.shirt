@@ -1,0 +1,6 @@
+function save_variable(var)
+//
+upload #var
+fn = wopen((#SYSPATH : #var : .var))
+write(#fn {#(#var)})
+close(#fn)

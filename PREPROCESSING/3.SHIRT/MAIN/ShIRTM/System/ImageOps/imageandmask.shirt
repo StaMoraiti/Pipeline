@@ -1,0 +1,11 @@
+function imageandmask(image mask {out $})
+// imageandmask(image mask out)
+// out = imageandmask(image mask)
+//
+// Multiplies the image in image voxel by voxel
+// with the mask in mask. This sets all the voxel 
+// values outside the mask to zero.
+
+CopyMask InputMask #mask OutputImage $imask
+ImageArithmetic Left #image * Right $imask OutputImage #out
+return #out

@@ -1,0 +1,8 @@
+function set_voxel(im pos {value 1} {output $})
+//
+sz = size(#im)
+MakeMask Size {1 1 1} rectangular BoundingBox {1 1 1 1 1 1} OutputMask $pixel
+CopyMask InputMask $pixel OutputImage $ipixel
+ImageArithmetic Left $ipixel * Right #value OutputImage $ipixel
+InsertImage InputImage #im ImageToInsert $ipixel BoundingBox {#pos[1] #pos[1] #pos[2] #pos[2] #pos[3] #pos[3]} OutputImage #output
+return #output

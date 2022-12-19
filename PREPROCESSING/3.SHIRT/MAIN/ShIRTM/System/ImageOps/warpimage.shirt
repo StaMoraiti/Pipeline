@@ -1,0 +1,6 @@
+function warpimage(image map {out $})
+// warpimage(image map out)
+// Apply the map to the image
+
+WarpImage InputImage #image InputMap #map OutputImage #out
+return #out

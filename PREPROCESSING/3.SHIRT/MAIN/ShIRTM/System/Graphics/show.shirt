@@ -1,0 +1,123 @@
+// show
+if (flag(help))
+  print show \n
+  print \s4 Image <input_image> \n
+  print \s8 Lower <0> \n
+  print \s8 Upper <100> \n
+  print \s8 ColourMap <heat> \n
+  print \s4 Mask <input_mask> \n
+  print \s8 MaskColour <green> \n
+  print \s4 Map <map> \n
+  print \s4 MapColour <green> \n
+  print \s4 Resolution <512> \n
+  quit
+endif
+resolution = parameter(Resolution 512)
+if (is_parameter(Image))
+  image = parameter(Image input_image)
+  if (list?(#image))
+    upper = parameter(Upper {100 100 100})
+	lower = parameter(Lower {0 0 0})
+	bitmap = #image[1]
+	if (#bitmap[1] == $)
+	  bitmap = #bitmap[{2 length(#bitmap)}]
+	endif
+	ln = length(#image)
+	if (#ln == 1)
+	  Display Red #image[1] RedUpper #upper[1] RedLower #lower[1] Resolution #resolution BitMap #bitmap
+	elseif (#ln == 2)
+	  Display Red #image[1] Green #image[2] RedUpper #upper[1] RedLower #lower[1] ~
+	      GreenUpper #upper[2] GreenLower #lower[2] Resolution #resolution BitMap #bitmap
+	elseif (#ln == 3)
+	  Display Red #image[1] Green #image[2] Blue #image[3] RedUpper #upper[1] RedLower #lower[1] ~
+	  GreenUpper #upper[2] GreenLower #lower[2] BlueUpper #upper[3] BlueLower #lower[3] Resolution #resolution BitMap #ibitmap
+    else
+	  error(too many images)
+	endif
+    size = size(#image[1])
+    file = wopen((#DISPLAYPATH : #image[1] : .txt))
+    write(#file {1 #size[3]})
+    close(#file)
+ else
+    if (!(image?(#image)))
+      error(#image is not an image)
+    endif
+    upper = parameter(Upper 100)
+    lower = parameter(Lower 0)
+    colour = parameter(ColourMap heat)
+    Display Mono #image Upper #upper Lower #lower ColourMap #colour Resolution #resolution BitMap #image
+    size = size(#image)
+    file = wopen((#DISPLAYPATH : #image : .txt))
+    write(#file {1 #size[3]})
+    close(#file)
+  endif
+endif
+if (is_parameter(Mask))
+  mask = parameter(Mask input_mask)
+  if (variable?(image))
+    image = #image
+  else
+    image = #mask
+  endif
+  if (list?(#mask))
+    if (!(parameter?(MaskColour)))
+      colour = {green red yellow blue magenta cyan}
+    else
+      colour = parameter(MaskColour {green})
+    endif
+    ln = length(#mask)
+    repeat count = 1
+      Display Mask #mask[#count] Colour #colour[#count] Resolution #resolution BitMap #image
+	until (#(++(count)) > #ln)
+  else
+    colour = parameter(MaskColour green)
+    if (!(mask?(#mask)))
+      error(#mask is not a mask)
+    endif
+    Display Mask #mask Colour #colour Resolution #resolution BitMap #image
+    size = size(#mask)
+  endif
+  file = wopen((#DISPLAYPATH : #image : .txt))
+  write(#file {1 #size[3]})
+  close(#file)
+endif
+if (is_parameter(Map))
+  mapname = parameter(Map map)
+  if (!(map?(#map)))
+    error(#map is not a map)
+  endif
+  if (variable?(image))
+    image = #image
+  else
+    image = #map
+  endif
+  pcolour = parameter(MapColour green)
+  if (not(is_map(#mapname)))
+    error(not a map file)
+  endif
+  Statistics map InputMap #mapname NodeSpacing nd
+  Statistics map InputMap #mapname OriginalImageSize size
+  bitwidth = fix((512 / #size[1])) * #size[1]
+  bitheight = fix((512 / #size[2])) * #size[2]
+  dsize = {#bitwidth #bitheight #size[3]}
+  MakeMask checkerboard BlockSize #nd Size #size OutputMask $check
+  CopyMask InputMask $check OutputImage icheck
+  ImageToMesh InputImage icheck OutputMesh mesh  
+  offset = {(#size[1] / 2 - 0.5) (#size[2] / 2 - 0.5) (#size[3] / 2 - 0.5)}
+  matoff = {{1 0 0 0} {#offset[1] 1 0 0} {#offset[2] 0 1 0} {#offset[3] 0 0 1}}
+  matoffneg = {{1 0 0 0} {-(#offset[1]) 1 0 0} {-(#offset[2]) 0 1 0} {-(#offset[3]) 0 0 1}}
+  matrix = {{1 0 0 0} {0 (#dsize[1] / #size[1]) 0 0} {0 0 (#dsize[2] / #size[2]) 0} {0 0 0 1}}
+  matrix = #matoffneg * #matrix * #matoff
+  MakeMap Size #size MapMatrix #matrix OutputMap $map
+  WarpMesh InputMesh mesh InputMap #mapname OutputMesh wmesh
+  WarpMesh InputMesh wmesh InputMap $map OutputMesh wmesh
+  MeshToImage InputMesh wmesh OutputImage $image Size #dsize
+  ImageLogic Left $image > Right 0.5 OutputMask $dmask
+  Display Mask $dmask Colour #pcolour
+  file = wopen((#DISPLAYPATH : #image : .txt))
+  write(#file {1 #size[3]})
+  close(#file)
+endif
+execute start /Min c:\python34\python.exe (#SYSPATH : System\python\displaybmp.py) #DISPLAYPATH #image
+//execute python3 /home/barber/ShIRT/System/python/displaybmp.py #DISPLAYPATH bitmap &
+

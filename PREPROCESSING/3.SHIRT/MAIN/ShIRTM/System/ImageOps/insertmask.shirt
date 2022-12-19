@@ -1,0 +1,10 @@
+function insertmask(input insert box {out $})
+// insertmask(input insert box out)
+// out = insertmask(input insert box)
+//
+// Inserts the mmask in insert into the 
+// mask in input in the position defined
+// by the bounding box in box.
+
+InsertMask InputMask #input MaskToInsert #insert BoundingBox #box OutputMask #out
+return #out

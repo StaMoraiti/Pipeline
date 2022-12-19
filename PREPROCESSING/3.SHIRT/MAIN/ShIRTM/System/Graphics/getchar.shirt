@@ -1,0 +1,16 @@
+function getchar(char)
+// getchar(char)
+// gets the list of lines needed to draw the character given in char
+//
+
+pos = intoken(ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890. #char)
+filename =  #SYSPATH : Characters\ : char : fix(#pos) : .char
+fp = ropen(#filename)
+ch = read(#fp)
+len = read(#fp)
+len = {(#len[1] + 6) #len[2]} 
+close(#fp)
+a = {#ch #len}
+return #a
+
+

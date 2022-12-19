@@ -1,0 +1,14 @@
+function imagetomesh(image {mesh $})
+// imagetomesh(image mesh)
+// mesh = imagetomesh(image)
+//
+// This function converts an image to a mesh.
+// The image needs to be a binary image, typically
+// derived from a mask.  However the image may be smoothed
+// to produce a smoother mesh surface
+
+if ((maximum(#image) > 1) | (minimum(#image) < 0))
+  error(#image is not a binary image)
+endif
+ImageToMesh InputImage #image OutputMesh #mesh
+return #mesh

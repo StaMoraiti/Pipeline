@@ -1,0 +1,4 @@
+// editor
+v = argslist()
+clear (@ : #v[1])
+//execute start #v[1]

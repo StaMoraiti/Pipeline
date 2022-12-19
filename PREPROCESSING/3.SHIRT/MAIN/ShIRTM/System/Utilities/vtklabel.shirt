@@ -1,0 +1,8 @@
+// vtklabel
+
+arguments(file)
+fid = ropen(#file)
+hd = read(#fid)
+label = read(#fid)
+close(#fid)
+return #label

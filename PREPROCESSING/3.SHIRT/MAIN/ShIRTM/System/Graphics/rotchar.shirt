@@ -1,0 +1,19 @@
+function rotchar(char angle)
+// rotchar(char angle)
+//
+rmat = {{cos(#angle) -(sin(#angle))} {sin(#angle) cos(#angle)}}
+len = length(#char[1])
+pos = {#char[2]}
+pos = #pos * #rmat
+repeat count = 1
+  mat = #char[1][#count] * #rmat
+  if (#count == 1)
+    rchar = {#mat}
+  else
+    rchar = #rchar + {#mat}
+  endif
+  ++(count)
+until (#count > #len)
+return {#rchar #pos[1]}
+
+

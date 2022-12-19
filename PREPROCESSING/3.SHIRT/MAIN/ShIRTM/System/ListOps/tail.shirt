@@ -1,0 +1,4 @@
+function tail(list {from 2})
+// tail(list from)
+//
+return #list[{#from length(#list)}]

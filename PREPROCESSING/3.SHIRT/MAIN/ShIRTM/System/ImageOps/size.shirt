@@ -1,0 +1,15 @@
+function size(a)
+// Returns the size of an image or mask
+if (is_image(#a))
+  Statistics image Size size InputImage #a
+elseif (is_mask(#a))
+  Statistics mask Size size InputMask #a
+elseif is_matrix(#a)
+  rows = length(#a)
+  c = #a[1]
+  cols = length(#c)
+  size = {#rows #cols}
+else
+  error(unknown object type)
+endif
+return #size

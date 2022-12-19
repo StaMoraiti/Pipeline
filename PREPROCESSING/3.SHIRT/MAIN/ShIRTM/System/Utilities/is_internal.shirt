@@ -1,0 +1,10 @@
+function is_internal(a)
+// is_internal(a)
+//
+// Returns 1 if the argument is the name of
+// an internal object, 0 otherwise
+if ((_ : #a)[2] == $)
+  return 1
+else
+  return 0
+endif

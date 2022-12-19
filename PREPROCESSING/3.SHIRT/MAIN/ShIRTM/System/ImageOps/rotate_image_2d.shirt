@@ -1,0 +1,9 @@
+// rotate_image_2d
+arguments(image angle out)
+if (not(is_variable(out)))
+  out = $
+endif
+MakeMap Size {128 128 1} MapMatrix {{1 0 0 0} {0 cos(#angle) sin(#angle) 0} {0 neg(sin(#angle)) cos(#angle) 0} {0 0 0 1}} ~
+  OutputMap rotmap
+WarpImage InputImage #image InputMap rotmap OutputImage #out
+return #out

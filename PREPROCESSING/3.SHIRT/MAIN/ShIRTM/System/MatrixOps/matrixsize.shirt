@@ -1,0 +1,11 @@
+// matrixsize(mat)
+// Returns the size of a matrix as a list
+// {rows cols}
+arguments(a)
+if not(is_matrix(#a))
+  error(not a matrix)
+endif
+rows = length(#a)
+c = #a[1]
+cols = length(#c)
+return {#rows #cols}

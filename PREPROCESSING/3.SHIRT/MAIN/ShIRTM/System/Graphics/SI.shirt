@@ -1,0 +1,3 @@
+function SI(image)
+// show file image via python
+execute start /Min c:\python34\python.exe c:\ShIRTMV7\System\python\displayimage.py (c:/ShIRTMV7/ShIRTdata/ : #image)

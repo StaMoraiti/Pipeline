@@ -1,0 +1,30 @@
+// SumSlices
+if (flag(help))
+  print SumSlices \n
+  print \s4 InputImage <input_image> \n
+  print \s4 OutputImage <output_image> \n
+  print \s4 Along <slices, rows, columns> \n
+  quit
+endif
+
+inputimage = parameter(InputImage input_image)
+direction = parameter(Along slices)
+outputimage = parameter(OutputImage output_image)
+
+if (#direction == slices)
+  size = size(#inputimage)
+  PackImage InputImage #inputimage betweenslices By #size[3] OutputImage #outputimage
+elseif (#direction == rows)
+  PermuteImage InputImage #inputimage Slices rows Columns columns Rows slices OutputImage $temp
+  size = size($temp)
+  PackImage InputImage $temp betweenslices By #size[3] OutputImage #outputimage
+elseif (#direction == columns)
+  PermuteImage InputImage #inputimage Slices columns Columns slices Rows rows OutputImage $temp
+  size = size($temp)
+  PackImage InputImage $temp betweenslices By #size[3] OutputImage #outputimage
+else
+  error(unrecognised direction)
+endif
+
+quit outputimage
+

@@ -1,0 +1,27 @@
+image = {}
+arguments(mapname image)
+//function arguments(mapname {image {}})
+if (not(is_map(#mapname)))
+  error(not a map file)
+endif
+Statistics map InputMap #mapname NodeSpacing nd
+Statistics map InputMap #mapname OriginalImageSize size
+if (length(#image) != 0)
+  display Mono #image
+endif
+scale = #BITMAPWIDTH / #size[1]
+if (#size[3] == 1)
+  nsize = {(#size[1] * #scale) (#size[2] * #scale) 1}
+else
+  nsize = {(#size[1] * #scale) (#size[2] * scale) (#size[3] * scale)}
+endif
+MakeMask checkerboard BlockSize (#scale * #nd) Size #nsize OutputMask $check
+copymask InputMask $check OutputImage $icheck
+ImageToMesh InputImage $icheck OutputMesh mesh
+MakeMap Size #nsize NodeSpacing (#scale * #nd) OutputMap $tmap
+RebinMap SourceMap #mapname DestinationMap $tmap OutputMap $dmap
+WarpMesh InputMesh mesh InputMap $dmap OutputMesh wmesh
+MeshToImage InputMesh wmesh OutputImage $image Size #nsize
+ImageLogic Left $image > Right 0.5 OutputMask $dmask
+Display Mask $dmask
+return {}

@@ -1,0 +1,17 @@
+function dilateimage(image {times 1} {out $} {nsize 3})
+// dilateimage(image times out nsize)
+// dilateimage(image times out)
+// out = dilateimage(image times)
+// out = dilateimage(image)
+//
+// Dilates the image in image n times
+// The definition of dilation for an imageis that the value of each voxel is 
+// replaced by the maximum voxel value in the neighbourhood.  In this case 
+// the default neighbourhood is a cube 3 x 3 x 3 voxels in size. If the nsize
+// parameter is given the neighbourhood is nsize x nsize.
+// If a value of times > 1 
+// is given this operation is repeated the number of times specified in times.
+
+MedianFilter InputImage #image Percentile 100 Times #times OutputImage #out Nsize #nsize
+return #out
+

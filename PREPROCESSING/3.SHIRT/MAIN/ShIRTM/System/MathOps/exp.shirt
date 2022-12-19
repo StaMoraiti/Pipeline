@@ -1,0 +1,23 @@
+function exp(num)
+// a = exp(num)
+//
+// Calculates the tangent whos num is num
+// The answer lies between 0 and 180
+if (list?(#num))
+  ln = length(#num)
+  numl = {}
+  repeat count = 1
+    numl = (#numl : {exp(#num[#count])})
+    ++(count)
+  until (#count > #ln)
+  return (#numl)
+elseif (!(number?(#num)))
+  error(input must be a number)
+endif
+return (2.718281828459046 ^ #num)
+
+
+
+
+
+     

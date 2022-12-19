@@ -1,0 +1,10 @@
+function insertimage(input insert box {out $})
+// insertimage(input insert box out)
+// out = insertimage(input insert box)
+//
+// Inserts the image in insert into the 
+// image in input in the position defined
+// by the bounding box in box.
+
+InsertImage InputImage #input ImageToInsert #insert BoundingBox #box OutputImage #out
+return #out

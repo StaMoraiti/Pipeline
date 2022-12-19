@@ -1,0 +1,12 @@
+function rotate_image(image angle {out $})
+// rotate_image anticlockwise
+//
+sz = size(#image)
+if (#sz[3] == 1)
+  MakeMap Size size(#image) MapMatrix {{1 0 0 0} {0 cos(#angle) sin(#angle) 0} {0 -(sin(#angle)) cos(#angle) 0} {0 0 0 1}} ~
+    OutputMap rotmap
+  WarpImage InputImage #image InputMap rotmap OutputImage #out
+  return #out
+else
+  error(not a 2d image)
+endif

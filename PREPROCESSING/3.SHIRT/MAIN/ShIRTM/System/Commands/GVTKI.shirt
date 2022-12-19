@@ -1,0 +1,13 @@
+// getVTKimage VTKInput input Output seed VTKfolder #VTKDATA
+
+inputimage = parameter(VTKInput input_image)
+outputimage = parameter(Output output_image)
+vtkdir = parameter(VTKfolder #DATAPATH)
+//print (#SYSPATH : vtk2shirt) (#vtkdir : #inputimage : .vtk) (#DATAPATH : #outputimage) \n
+execute  (#SYSPATH : vtk2shirt) (#vtkdir : #inputimage : .vtk) (#DATAPATH : #outputimage)
+loadvariables((#DATAPATH : #outputimage : .txt))
+VTKPARAM = {#ColumnSpacing #RowSpacing #SliceSpacing #ColumnOrigin #RowOrigin #SliceOrigin #Label}
+quit ColumnSpacing RowSpacing SliceSpacing ColumnOrigin RowOrigin SliceOrigin
+
+
+

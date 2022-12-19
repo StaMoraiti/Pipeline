@@ -1,0 +1,4 @@
+function meshtoimage(mesh size {vd 1} {image $})
+//
+MeshToImage InputMesh #mesh VolumeDivision #vd Size #size OutputImage #image
+return #image

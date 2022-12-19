@@ -1,0 +1,20 @@
+function copy(input {output $})
+// output = copy(input)
+// copy(input output)
+//
+// Copies the object in input to the object in
+// output. The object specified in input can be
+// an image, a mask, a mesh or a map.
+if (is_image(#input))
+  CopyImage InputImage #input OutputImage #output
+elseif (is_mask(#input))
+  CopyMask InputMask #input OutputMask #output
+elseif (is_map(#input))
+  CopyMap InputMap #input OutputMap #output
+elseif (is_mesh(#input))
+  CopyMesh InputMesh #input OutputMesh #output
+else
+  error(Not a recognised object type)
+endif
+
+return #output

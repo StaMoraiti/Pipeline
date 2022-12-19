@@ -1,0 +1,5 @@
+function warpmesh(mesh map {out $})
+//  warpmesh(mesh map out)
+//
+WarpMesh InputMesh #mesh InputMap #map OutputMask #out
+return #out

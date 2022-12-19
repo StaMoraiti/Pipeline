@@ -1,0 +1,22 @@
+function poschar(char pos)
+// poschar(char pos)
+
+len = length(#char)
+
+mat = transpose(#char[1])
+chx = {#mat[1]} + #pos[1]
+chy = {#mat[2]} + #pos[2]
+ch = {transpose({#chx[1] #chy[1]})}
+
+if (#len > 1)
+  repeat count = 2
+    mat = transpose(#char[#count])
+    chx = {#mat[1]} + #pos[1]
+    chy = {#mat[2]} + #pos[2]
+    ch = #ch + {transpose({#chx[1] #chy[1]})}
+    ++(count)
+  until (#count > #len)
+endif
+return #ch
+
+

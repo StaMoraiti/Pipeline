@@ -1,0 +1,11 @@
+a = argslist()
+send time time
+ln = length(#a)
+if (#ln  > 0)
+  repeat c = 1
+    print #a[#c]
+    print \s1
+  until (#(++(c)) > #ln)
+endif
+print \s4 (#time - #STARTIME) \n
+

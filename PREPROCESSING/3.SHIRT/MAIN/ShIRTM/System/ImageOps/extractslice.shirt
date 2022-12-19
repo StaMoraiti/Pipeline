@@ -1,0 +1,20 @@
+function extractslice(imageormask {slice middle} {out $})
+// extractslice(imageormask slice out)
+// out extractslice(imageormask slice)
+// out extractslice(imageormask)
+//
+// Extracts the single slice given in slice from the
+// image or mask and returns this image or slice.  If the slice
+// value is not given the middle slice is chosen
+  
+size = size(#imageormask)
+if (#slice == middle)
+   slice = fix(((#size[3] + 1) / 2))
+endif
+box = {1 #size[1] 1 #size[2] #slice #slice}
+if (is_image(#imageormask))
+  ExtractImage InputImage #imageormask BoundingBox #box OutputImage #out
+elseif (is_mask(#imageormask))
+  ExtractMask InputMask #imageormask BoundingBox #box OutputMask #out
+endif
+return #out 

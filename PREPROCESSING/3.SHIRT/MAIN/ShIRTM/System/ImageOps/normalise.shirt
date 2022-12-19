@@ -1,0 +1,11 @@
+function normalise(image {mask NULL} {nimage $})
+// normalises the image to an average count of 1
+// within the region specified by mask
+
+if (#mask == NULL)
+  mask = $temp
+  MakeMask Size size(#image) OutputMask #mask
+endif
+Statistics image InputImage #image Average average Region #mask
+ImageArithmetic Left #image / Right #average OutputImage #nimage
+return #nimage

@@ -1,0 +1,5 @@
+// showim(image)
+arguments(im)
+display Mono #im
+//execute taskkill /IM firefox.exe > dump 2> domp
+execute start c:\ShIRTM\displays\shirtview.shv 

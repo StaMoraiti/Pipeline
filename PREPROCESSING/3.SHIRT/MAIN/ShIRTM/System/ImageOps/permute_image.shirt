@@ -1,0 +1,27 @@
+function permute_image(a order {out $})
+// permute_image(image order)
+sz = size(#a)
+if ((#sz[3] == 1) & (length(#order) != 2))
+  error(permutation error)
+endif
+if (!(list?(#order)))
+  od = {}
+  repeat count = 1
+    if (#order[#count] == r)
+      od = (#od : rows)
+    elseif (#order[#count] == c)
+      od = (#od : columns)
+    elseif (#order[#count] == s)
+      od = (#od : slices)
+    else
+      error(illegal option)
+    endif
+  until (#(++(count)) > length(#order))
+  order = #od
+endif  
+if (#sz[3] > 1)
+  PermuteImage InputImage #a Columns #order[1] Rows #order[2] Slices #order[3] OutputImage #out
+else
+  PermuteImage InputImage #a Columns #order[1] Rows #order[2] OutputImage #out
+endif
+return #out

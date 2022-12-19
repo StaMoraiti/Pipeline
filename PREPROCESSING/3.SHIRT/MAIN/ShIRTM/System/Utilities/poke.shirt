@@ -1,0 +1,7 @@
+function poke(a)
+//
+val = #a[1]
+pos = #a[2]
+pop(#pos)
+push({#val #pos})
+return {}

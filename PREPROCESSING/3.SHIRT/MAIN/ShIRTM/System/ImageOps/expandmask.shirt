@@ -1,0 +1,20 @@
+function expandmask(mask {n 2} {out $})
+// expandmask(mask n output)
+// output = expandmask(mask n)
+// output = expandmask(mask)
+//
+// changes the dimensions of an mask while keeping the number
+// of voxels constant.
+
+if (!(mask?(#mask)))
+  error(#mask is not a mask)
+endif
+if (!(list?(#n)))
+  n = {#n #n #n}
+elseif (length(#n) == 2)
+  n = #n : 1
+endif
+m = {(1.0 / #n[1]) (1.0 / #n[2]) (1.0 / #n[3])}
+MakeMap Size size(#mask) NodeSpacing 8 MapMatrix {{1 0 0 0} {0 #m[1] 0 0} {0 0 #m[2] 0} {0 0 0 #m[3]}} OutputMap $map
+WarpMask InputMask #mask InputMap $map OutputMask #out
+return #out

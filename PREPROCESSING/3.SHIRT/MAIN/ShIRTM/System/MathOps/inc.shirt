@@ -1,0 +1,8 @@
+function inc(_a_ {num 1})
+// inc(a num)
+//
+// increment a by num
+upload #_a_
+#_a_ = #(#_a_) + #num
+download #_a_
+return #_a_

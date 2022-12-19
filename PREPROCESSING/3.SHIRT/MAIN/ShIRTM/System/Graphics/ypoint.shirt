@@ -1,0 +1,6 @@
+function ypoint(y)
+//
+YSCALE = #SCREENSIZE[2] / (#YMAX - #YMIN)
+ys = #YSCALE * (#y - #YMIN) + #BORDERS[2]
+ys = fix(#ys)
+return #ys

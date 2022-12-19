@@ -1,0 +1,18 @@
+function erodeimage(image {times 1} {out $} {nsize 3})
+// erodeimage(image n out nsize)
+// erodeimage(image n out)
+// out = erodeimage(image n)
+// out = erodeimage(image)
+//
+// Erodes the image in image n times
+// The definition of erosion for an imageis that the value of each voxel is 
+// replaced by the minimum voxel value in the neighbourhood.  In this case 
+// the default neighbourhood is a cube 3 x 3 x 3 voxels in size. If the nsize
+// parameter is given the neighbourhood is nsize x nsize.
+// If a value of times > 1 
+// is given this operation is repeated the number of times specified in times.
+
+MedianFilter InputImage #image Percentile 0 Times #times OutputImage #out Nsize #nsize
+return #out
+
+

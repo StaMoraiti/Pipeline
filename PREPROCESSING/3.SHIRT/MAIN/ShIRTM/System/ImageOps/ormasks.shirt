@@ -1,0 +1,8 @@
+function ormasks(maska maskb {maskc $})
+// ormasks(maska maskb maskc)
+// Calculates the logicalor between the
+// two masks maska and maskb.  The answer
+// is maskc.
+
+MaskLogic Left #maska | Right #maskb OutputMask #c
+return #c

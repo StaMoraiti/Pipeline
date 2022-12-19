@@ -1,0 +1,10 @@
+function get_pixel_value(im col row slice frame)
+//
+if (is_internal(#im))
+  ExtractImage InputImage #im[#frame] BoundingBox {#col #col #row #row #slice #slice} OutputImage $max
+  return maximum($max)
+else
+  ExtractImage InputImage {#im #frame} BoundingBox {#col #col #row #row #slice #slice} OutputImage $max
+  return maximum($max)
+endif
+  

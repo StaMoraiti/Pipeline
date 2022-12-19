@@ -1,0 +1,11 @@
+function savevariables(file list)
+//
+fp = wopen((#SYSPATH : #file))
+len = length(#list)
+repeat 
+  var = #list[#len]
+  upload #var
+  write(#fp {#var #(#var) \n})
+  len = #len - 1
+until (#len == 0)
+return

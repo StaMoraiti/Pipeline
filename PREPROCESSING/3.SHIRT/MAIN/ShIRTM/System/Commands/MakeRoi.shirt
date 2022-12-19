@@ -1,0 +1,42 @@
+// MakeRoi
+// MaskRoi Image imagename
+// Multiple regions can be drawn on the image
+// Terminate each region with a right click.
+// Terminate session by closing the image window
+image = parameter(Image NULL)
+colourmap = parameter(ColourMap heat)
+if (flag?(new))
+  Display Mono #image BitMap #image ColourMap #colourmap
+endif
+sz = size(#image)
+output = parameter(Mask mask)
+file = wopen((#DISPLAYPATH : #image : .txt))
+write(#file {1 #sz[3]})
+close(#file)
+execute {del (#DISPLAYPATH : roi*.*) > dump}
+execute {(#SYSPATH : System\Python\ : makeroi.py)  #DISPLAYPATH #image roi}
+fn = ropen((#DISPLAYPATH : roinum.txt))
+if (#fn > 0)
+  num = read(#fn)
+  close(#fn)
+  num = #num[1]
+else
+  num = 0
+endif
+if (#num > 0)
+  repeat count = 1
+    fn = ropen((#DISPLAYPATH : roi : #count : .txt))
+    line = read(#fn)
+    close(#fn)
+    sc = #BITMAPWIDTH / #sz[1]
+	MakeMask line Size {#BITMAPWIDTH #BITMAPHEIGHT 1} Points #line OutputMask $out
+	MaskMorphology InputMask $out fill OutputMask $out
+	CopyMask InputMask $out OutputImage $iout
+	PackImage InputImage $iout By #sc OutputImage $iout
+	ImageLogic Left $iout > Right (#sc * #sc * 0.5) OutputMask (#output : #count)
+    ++(count)
+  until (#count > #num)
+endif
+
+
+

@@ -1,0 +1,21 @@
+function squeeze(lst)
+//
+ln = length(#lst)
+lz = {}
+if (#ln > 1)
+  repeat count = 1
+    if (list?(#lst[#count])) 
+      lz = #lz : {squeeze(#lst[#count])}
+	else
+	  lz = #lz : {#lst[#count]}
+	endif
+  until (#(++(count)) > #ln)
+  return #lz
+else
+  if (list?(#lst))
+    lst = squeeze(#lst[1])
+    return #lst
+  endif
+  return #lst
+endif
+return #lst

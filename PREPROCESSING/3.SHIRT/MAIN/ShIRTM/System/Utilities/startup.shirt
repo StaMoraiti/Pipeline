@@ -1,0 +1,8 @@
+print ShIRT command line mode \n \n
+print Enter end to close the session \n \n
+print use loadvariables and savevariables to \n
+print retain variables between sessions \n \n
+//loadvariables(vars.txt)
+download {}
+clear {}
+commandmode

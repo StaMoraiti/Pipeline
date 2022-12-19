@@ -1,0 +1,6 @@
+//variables
+upload {}
+send variablenames names
+print #names \n
+
+

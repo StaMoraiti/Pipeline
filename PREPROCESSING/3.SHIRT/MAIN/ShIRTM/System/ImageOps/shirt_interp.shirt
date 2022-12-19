@@ -1,0 +1,28 @@
+function shirt_interp(a {output $})
+// interpolates between slices using registration
+size = size(#a)
+ImageLogic Left extractslice(#a 1) >= Right 0 OutputMask $mask
+kp = 1
+MakeImage Size {#size[1] #size[2] (#size[3] * 2 - 1)} OutputImage #output
+repeat count = 1
+  print #count \r
+  f = extractslice(#a #count)
+  ExtractImage InputImage #a BoundingBox {1 #size[1] 1 #size[2] #count #count} OutputImage $f
+  kz = #count + 1
+  ExtractImage InputImage #a BoundingBox {1 #size[1] 1 #size[2] #kz #kz} OutputImage $g
+  Register Fixed $f Moved $g Mask $mask NodeSpacing 4 Map $mapa Registered $registered
+  Register Fixed $g Moved $f Mask $mask NodeSpacing 4 Map $mapb Registered $registered
+  WarpImage InputImage $g InputMap $mapa ScalingValue 0.5 OutputImage $go
+  WarpImage InputImage $f InputMap $mapb ScalingValue 0.5 OutputImage $fo
+  ImageArithmetic Left $go + Right $fo LeftBy 0.5 RightBy 0.5 OutputImage $av
+  InsertImage InputImage #output ImageToInsert $f BoundingBox {1 #size[1] 1 #size[2] #kp #kp} OutputImage #output
+  ++(kp)
+  InsertImage InputImage #output ImageToInsert $av BoundingBox {1 #size[1] 1 #size[2] #kp #kp} OutputImage #output
+  ++(kp)
+  ++(count)
+until (#count >= #size[3])
+InsertImage InputImage #output ImageToInsert $g BoundingBox {1 #size[1] 1 #size[2] #kp #kp} OutputImage #output
+return #output
+
+  
+  

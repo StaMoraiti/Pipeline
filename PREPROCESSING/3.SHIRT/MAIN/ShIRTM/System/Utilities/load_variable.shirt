@@ -1,0 +1,8 @@
+function load_variable(var)
+//
+fn = ropen((#SYSPATH : #var : .var))
+#var = read(#fn)
+close(#fn)
+#var = #(#var)[1]
+download #var
+return #(#var)

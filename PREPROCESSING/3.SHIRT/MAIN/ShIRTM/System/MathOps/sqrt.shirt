@@ -1,0 +1,24 @@
+function sqrt(num)
+// a = sqrt(num)
+//
+// Calculates the sqrt of num
+if (list?(#num))
+  ln = length(#num)
+  numl = {}
+  repeat count = 1
+    numl = (#numl : {sqrt(#num[#count])})
+    ++(count)
+  until (#count > #ln)
+  return (#numl)
+elseif (!(number?(#num)))
+  error(input must be a number)
+elseif (#num < 0)
+  error(input must be positive or zero)
+endif
+return (#num ^ 0.5)
+
+
+
+
+
+     

@@ -1,0 +1,10 @@
+function volume(a)
+// volume(mask)
+// Returns the number of non-zero voxels
+// in a mask
+if (is_mask(#a))
+  Statistics mask Volume vol InputMask #a
+else
+  error(not a mask type)
+endif
+return #vol

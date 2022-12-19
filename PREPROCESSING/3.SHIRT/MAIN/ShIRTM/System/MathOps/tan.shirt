@@ -1,0 +1,14 @@
+function tan(angle)
+// tan(angle)
+// Calculate the tangent of an angle
+// The angle is in degrees
+c = cos(#angle)
+if (abs(#c) < 0.0000000001)
+  if (#angle >= 0)
+    return inf
+  else
+    return -inf
+  endif
+else
+  return (sin(#angle) / #c)
+endif

@@ -1,0 +1,25 @@
+function imagetoarray(im)
+//
+// images can have up to 4 non-singleton dimensions.
+// this function eliminates singleton dimensions.
+// if the remaining number of dimensions is 2 then
+// the array is a matrix.
+c = copy(#im)
+sz = size(#c)
+res = {}
+repeat frame = 1
+  sl = {}
+  repeat slice = 1
+    rw = {}
+	repeat row = 1
+	  cl = {}
+	  repeat col = 1
+		cl = #cl : {get_pixel_value(#c #col #row #slice #frame)}
+	  until (#(++(col)) > #sz[1])
+	  rw = #rw : {#cl}
+	until (#(++(row)) > #sz[2])
+	sl = #sl : {#rw}
+  until (#(++(slice)) > #sz[3])
+  res = #res : {#sl}
+until (#(++(frame)) > #sz[4])
+return #res

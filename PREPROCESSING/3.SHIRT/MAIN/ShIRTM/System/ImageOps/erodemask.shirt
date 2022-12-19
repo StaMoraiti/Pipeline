@@ -1,0 +1,15 @@
+function erodemask(mask {times 1} {out $})
+// erodemask(mask times out)
+// out = erodemask(mask times)
+// out = erodemask(mask)
+
+// The mask is morphologically eroded.
+// If the value of times >1 this operation
+// is repeated the number of times specified in
+// times.  
+// The neighbourhood is always 3 x 3 x 3
+
+MaskMorphology erode InputMask #mask OutputMask #out Times #times
+return #out
+
+
