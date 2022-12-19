@@ -1,0 +1,1 @@
+The mat files failure load and boneStifness sotre all the data values for all specimens(6) and timepoints(6).
