@@ -1,0 +1,17 @@
+# vtk DataFile Version 2.0
+vtkExample
+ASCII
+DATASET UNSTRUCTURED_GRID
+POINTS 3 float
+1 1 1
+1 1 0
+2 2 0
+CELLS 1 4
+3 0 1 2
+CELL_TYPES 1
+5
+POINT_DATA 3
+VECTORS u_v_w float
+0.1 0.1 0
+0.1 0.1 0
+0.1 0.5 0.7

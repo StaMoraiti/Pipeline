@@ -1,0 +1,2 @@
+PCA_results: the correct one with correct shirt trilinear interpolation
+PCA_results1:the wrong, displacement from moved to fixed
