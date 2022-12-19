@@ -1,0 +1,171 @@
+NS =
+
+50
+
+
+NSstring =
+
+NS50
+
+
+NSstring2 =
+
+NS 50
+
+*************************************************************************************************
+*                                                                                               *
+*                                                                                               *
+*                 SHEFFIELD IMAGE REGISTRATION TOOLKIT (ShIRT) Version 12                       *
+*                                                                                               *
+*                                                                                               *
+*************************************************************************************************
+ 
+Registering the images
+D:\Projects_UniSh\MAMBO\Registration\Accuracy\Example\Scan12\EXAMPLE\NS50\
+** 0 0
+Initial Mutual Information = 0.610134 
+Image size: Columns = 201  rows = 201  slices = 201
+Upper, lower node spacing  100, 50
+Map form nonlinear
+Optimised Lambda
+Scale amplitude model
+Laplacian constraint
+elapsed time    0.3 seconds
+Full Number of Nodes = 125,  Used Number of Nodes = 64
+Number of Computational Nodes = 256
+Fixed smooth 0, Moved smooth 0 
+Residual 0.10
+Optimised lambda      8.18 with condition index     49.40
+m = 1   EC = 0  um = 0.31 ua = 0.25  MI =  0.63616 9 100
+m = 2   EC = 1  um = 0.11 ua = 0.08  MI =  0.64455 9 100
+Total computational times (ms): 5460, 0, 575
+elapsed time   13.5 seconds
+Full Number of Nodes = 343,  Used Number of Nodes = 216
+Number of Computational Nodes = 864
+Fixed smooth 0, Moved smooth 0 
+Residual 0.10
+Optimised lambda      6.18 with condition index     42.99
+m = 1   EC = 1  um = 0.32 ua = 0.09  MI =  0.65243 12 50
+Total computational times (ms): 5110, 10, 560
+elapsed time   20.0 seconds
+Maximum memory used 49002420
+
+save and copy map
+
+map02 = 
+
+    x: [7x7x7 double]
+    y: [7x7x7 double]
+    z: [7x7x7 double]
+    u: [7x7x7 double]
+    v: [7x7x7 double]
+    w: [7x7x7 double]
+    m: [7x7x7 double]
+    n: [7x1 double]
+
+write output file from map
+write nodes file for ANSYS
+write displacements for ANSYS
+write elements file for ANSYS
+
+Output =
+
+OK
+
+End
+
+ans =
+
+OK
+
+>> 
+
+
+
+
+
+
+NS =
+
+50
+
+
+NSstring =
+
+NodeSpacing50
+
+
+NSstring2 =
+
+NodeSpacing 50
+
+*************************************************************************************************
+*                                                                                               *
+*                                                                                               *
+*                 SHEFFIELD IMAGE REGISTRATION TOOLKIT (ShIRT) Multi                            *
+*                                                                                               *
+*                                                                                               *
+*************************************************************************************************
+ 
+Registering the images
+D:\Projects_UniSh\MAMBO\Registration\Accuracy\Example\Scan12\EXAMPLE\NodeSpacing50\
+Initial Mutual Information = 0.610134 
+Image size: Columns = 201  Rows = 201  Slices = 201  Frames = 1
+Upper, lower node spacing  100, 50
+Map form nonlinear
+Optimised Lambda
+Scale amplitude model
+Laplacian constraint
+elapsed time    0.2 seconds
+Full Number of Nodes = 125,  Used Number of Nodes = 64
+Number of Computational Nodes = 256
+Fixed smooth 0, Moved smooth 0
+Residual 0.10
+
+Optimised lambda      8.18 with condition index     49.39
+m = 1   EC = 0  um = 0.31 ua = 0.25  MI =  0.63614 9 100
+m = 2   EC = 1  um = 0.11 ua = 0.08  MI =  0.64457 9 100
+Total computational times (secs):  4.415,  0.000,  0.886
+elapsed time   11.5 seconds
+Full Number of Nodes = 343,  Used Number of Nodes = 216
+Number of Computational Nodes = 864
+Fixed smooth 0, Moved smooth 0
+Residual 0.10
+
+Optimised lambda      6.18 with condition index     43.00
+m = 1   EC = 1  um = 0.32 ua = 0.09  MI =  0.65215 12 50
+Total computational times (secs):  4.396,  0.002,  0.951
+elapsed time   17.4 seconds
+
+save and copy map
+
+map02 = 
+
+    x: [7x7x7 double]
+    y: [7x7x7 double]
+    z: [7x7x7 double]
+    u: [7x7x7 double]
+    v: [7x7x7 double]
+    w: [7x7x7 double]
+    m: [7x7x7 double]
+    s: [7x7x7 double]
+    n: [7x1 double]
+
+write output file from map
+write nodes file for ANSYS
+write displacements for ANSYS
+write elements file for ANSYS
+
+Output =
+
+OK
+
+End
+
+ans =
+
+OK
+
+>> 
+
+
