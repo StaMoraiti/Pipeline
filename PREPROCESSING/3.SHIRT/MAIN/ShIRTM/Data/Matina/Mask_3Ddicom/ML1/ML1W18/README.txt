@@ -1,0 +1,1 @@
+The mask image is set to be the fixed

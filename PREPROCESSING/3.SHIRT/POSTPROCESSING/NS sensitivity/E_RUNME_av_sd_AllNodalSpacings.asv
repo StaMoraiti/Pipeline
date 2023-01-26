@@ -1,0 +1,21 @@
+%% useful /*---- saving errors in a file
+%6*2*10*3*2 =720
+% A=zeros(720,6);
+% a2t = array2table(A,"VariableNames",["Mouse","Voxels","NodalSpacing","Vq","Av/Sd","Value"]);
+
+mouse = [1];
+dl = [2.5];
+week=18;
+NS = [5];
+% parpool(4)
+
+for i = 1:length(mouse)
+    for j = 1:length(dl)
+        for k = 1:length(NS)
+        %parfor k = 1:length(NS)
+            cd("G:\Shared drives\Matina_Emily\Emily_folder\Emily's code\")            
+            E_av_sd_AllNodes_Limited(mouse(i),18,dl(j),NS(k));
+        end
+    end
+end
+
