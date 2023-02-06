@@ -1,9 +1,9 @@
 function [a_g1,a_g2,a_g3,a_g4]=scores_clustering
 
-Respath='G:\My Drive\PhD\WORK\2nd_year\PCA_PIPELINE\PCA\OUTPUTS\';
+Respath='C:\Users\matin\PHD\WORK\2ND YEAR\PCA_PIPELINE\Pipeline\PCA\OUTPUTS\';
 cd(Respath);
 load("PCA_results_MLvsOVX_Registered.mat")
-Inputpath='G:\My Drive\PhD\WORK\2nd_year\PCA_PIPELINE\PCA\MAIN\';
+Inputpath='C:\Users\matin\PHD\WORK\2ND YEAR\PCA_PIPELINE\Pipeline\PCA\MAIN\';
 cd(Inputpath)
 load("PCAinput_MLvsOVX.mat")
 score=-score;
