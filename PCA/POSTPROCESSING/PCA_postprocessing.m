@@ -6,6 +6,7 @@ xlabel('Number of modes')
 
 figure()
 cum_var=cumsum(latent)/sum(latent);
+
 semilogy(cum_var,'o-')
 ylabel('Cumulative variance')
 xlabel('Number of modes')

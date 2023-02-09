@@ -13,8 +13,17 @@ Mml=size(a_g1,1);Movx=size(a_g3,1);
 %% the corresponding modes describes natural variability or uncesrtainty
 %% AND NOT A TEMPORAL VARIATION
 
-daML=diff_M(a_g1,a_g2);
-daOVX=diff_M(a_g3,a_g4);
+% daML=diff_M(a_g1,a_g2);
+% daOVX=diff_M(a_g3,a_g4);
+
+daML=diff_M1(a_g1,a_g2);
+daOVX=diff_M1(a_g3,a_g4);
+%% PINAKI'S CRITERION:
+% Calculates the mean difference between the score temporal changes of two groups over
+% the the mean score change in the ovx
+%f= (median(daML)-median(daOVX))./(median(daOVX).*(mean([std(daML); std(daOVX)])));
+f= (mean(daML)-mean(daOVX))./(mean(daOVX));
+
 figure;
 group=[zeros(Mml,1);ones(Movx,1)];
 colors=lines(length(unique(group)));
@@ -161,12 +170,25 @@ end
 function [daN]=diff_M(a_g1,a_g2)
 Ma_i=max([abs(a_g1) ; abs(a_g2)]);
 for i=1:size(a_g1,1)
-    daN(i,:)=(a_g2(i,:)-a_g1(i,:))./Ma_i;  
+    daN(i,:)=(a_g2(i,:)-a_g1(i,:));  
     
     
 end
 
 end
+
+
+function [daN]=diff_M1(a_g1,a_g2)
+
+%% Standardize over the mean value of the t1
+Mu_i=mean(a_g1);
+for i=1:size(a_g1,1)
+    daN(i,:)=(a_g2(i,:)-a_g1(i,:))./Mu_i;    
+end
+
+end
+
+
 
 
 
