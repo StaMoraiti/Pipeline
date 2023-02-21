@@ -1,21 +1,15 @@
-function [a_g1,a_g2,a_g3,a_g4]=scores_clustering
+function [a_g1,a_g2,a_g3,a_g4]=scores_clustering(latent, score, coeff)
 
-Respath='C:\Users\matin\PHD\WORK\2ND YEAR\PCA_PIPELINE\Pipeline\PCA\OUTPUTS\';
-cd(Respath);
-load("PCA_results_MLvsOVX_Registered.mat")
-Inputpath='C:\Users\matin\PHD\WORK\2ND YEAR\PCA_PIPELINE\Pipeline\PCA\MAIN\';
-cd(Inputpath)
-load("PCAinput_MLvsOVX.mat")
 
 %% Normalize over the percentage explained
-cum_var=cumsum(latent)/sum(latent);
-Mvar(1)=cum_var(1);
-for i=2:size(coeff,2)
-        Mvar(i)=cum_var(i)-cum_var(i-1);
-end
-%score=-score./repmat(Mvar,[22,1]);
-smax=max(score);
-score=-score./smax;
+% cum_var=cumsum(latent)/sum(latent);
+% Mvar(1)=cum_var(1);
+% for i=2:size(coeff,2)
+%         Mvar(i)=cum_var(i)-cum_var(i-1);
+% end
+% score=-score./repmat(Mvar,[22,1]);
+% smax=max(score);
+% score=-score./smax;
 
 
 a_g1=score(1:6,:);muA_g1=mean(a_g1);

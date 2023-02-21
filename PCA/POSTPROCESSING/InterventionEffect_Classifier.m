@@ -1,7 +1,16 @@
 clear all;
 dir_codes=pwd;
+%% Read the PCA outputs
+
+Respath='C:\Users\matin\.1-PHD\Pipeline\PCA\OUTPUTS\';
+cd(Respath);
+load("PCA_results_MLvsOVX_Registered.mat")
+Inputpath='C:\Users\matin\.1-PHD\Pipeline\PCA\MAIN\';
+cd(Inputpath)
+load("PCAinput_MLvsOVX.mat")
+
 %% Scores Clustering with respect to the intervention groups and timepoints t1 and t2
-[a_g1,a_g2,a_g3,a_g4]=scores_clustering;
+[a_g1,a_g2,a_g3,a_g4]=scores_clustering(latent, score, coeff);
 Mml=size(a_g1,1);Movx=size(a_g3,1);
 %% FIRST CRTERION: Identifies the modes that describe temporal variations
 %% Gradient of the scores between t1 and t2 should be of the
