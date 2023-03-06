@@ -11,7 +11,7 @@ load("PCAinput_MLvsOVX.mat")
 cd(dir_codes)
 
 %% Score separation with respecto to the exmained cohoorts and time points
-[a_g1,a_g2,a_g3,a_g4]=scores_clustering(latent, score, coeff);
+[a_g1,a_g2,a_g3,a_g4]=scores_clustering(latent, score, coeff); 
 Mml=size(a_g1,1);Movx=size(a_g3,1);
 
 %% Calculate the temporal score changes
@@ -20,13 +20,7 @@ daOVX=diff_M(a_g3,a_g4);
 
 
 %% STATISTICAL TESTS
-%% 1. Are the score values s.s.d at time point 1 between gropus?
-%   H0: a1ML=a1OVX;
-%   H1: a1ML/=a1OVX
-% -- The groups are independent, the sample size small and therefore we apply 
-% an non parametric unpaired statistical test. This is the 
-% Wann-Whitney U test --
-% The Wann-Whitney test is applied by using the function ranksum
+%% F=DAml-DAovx/DAovx : measure for treatment classification
 
 conf=0.05;
 for i=1:size(a_g1,2)
@@ -72,6 +66,10 @@ tc2=ranksum(daML(:,i),daOVX(:,i),'tail','left');% H0: daML>daOVX, H1: daML<daOVX
 
 
 end
+
+%% EXTRA FEATURE: THE TREATMENT EFFECT (MODEWISE) SHOULD BE LARGER THAN THE NATURAL VARIABILITY 
+%% DESCRIBED BY THE EXAMINED MODE
+f2=(mean(a_g2)-mean(a_g1))/std(a_g1); % f>1, f<1
 
 
 
